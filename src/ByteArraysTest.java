@@ -14,11 +14,16 @@ public class ByteArraysTest {
 
     @Test
     public void testBytes(){
-        final int[] lens = {2, 4, 8, 16, 48, 56, 82, 102, 182, 248, 364, 1024};
+        final int[] lens = {0, 2, 4, 96, 108, 118, 204, 308, 406, 504, 668,
+                8, 16, 32, 36, 48, 56, 72, 82, 96, 102,
+                182, 248, 364, 784, 1024, 2048, 4096, 8090};
+
         final Random random = new Random(387346247l);
         final long maxTimes = 100l;
         final AtomicInteger ok = new AtomicInteger(0);
         final AtomicInteger total = new AtomicInteger(0);
+
+        ByteArrays.getInstance().setMaxPoolSize(100*1024);
 
         Runnable testRun = new Runnable() {
             int index = 0;
@@ -38,7 +43,7 @@ public class ByteArraysTest {
                     one.release();
 
                     count++;
-                    if(total.incrementAndGet() % 10 == 0){
+                    if(total.incrementAndGet() % 50 == 0){
                         ByteArrays.getInstance().dump();
                     }
                 }
@@ -46,9 +51,10 @@ public class ByteArraysTest {
                 System.out.println("run ... exit " + ok.get());
             }
         };
-        runManyThread(4, testRun);
+        int num = 20;
+        runManyThread(num, testRun);
 
-        while (true && ok.get() < lens.length){
+        while (true && ok.get() < num){
             try {
                 Thread.sleep(4000);
             } catch (InterruptedException e) {
