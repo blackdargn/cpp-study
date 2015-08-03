@@ -730,7 +730,7 @@ void test_atomic_exchange_strong(){
 	std::cout<<" \n";
 }
 ////////////////////////////////////////////////////////////////////////////
-int main() {
+int main_test() {
 //	test_atomic_exchange_strong();
 //	test_atomic_exchange_weak();
 //	test_atomic_exchange();
