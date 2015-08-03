@@ -3,6 +3,7 @@
 // Copyright   : Your copyright notice
 // Description : Hello World in C++, Ansi-style
 //============================================================================
+#include "thread_learn.h"
 
 #include <stdlib.h>
 #include <stdio.h>
